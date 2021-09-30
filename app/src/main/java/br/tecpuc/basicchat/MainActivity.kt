@@ -8,7 +8,12 @@ import br.tecpuc.basicchat.adapter.MessageAdapter
 import br.tecpuc.basicchat.databinding.ActivityMainBinding
 import kotlinx.android.synthetic.main.activity_main.*
 
+const val USER_ID = 0
+const val OTHER_ID = 1
+
 class MainActivity : AppCompatActivity() {
+
+    private var fromUser = true
 
     private lateinit var binding: ActivityMainBinding
 
@@ -24,13 +29,17 @@ class MainActivity : AppCompatActivity() {
 
     private fun initViews() {
         binding.sendButton.setOnClickListener {
-            val message = binding.messageEdittext.text.toString()
+            val messageText = binding.messageEdittext.text.toString()
+            binding.messageEdittext.setText("")
 
             val adapter = binding.messageList.adapter
-            (adapter as? MessageAdapter)?.addItem(message)
-            binding.messageList.scrollToPosition((adapter?.itemCount ?: return@setOnClickListener) -1)
+            if(adapter is MessageAdapter){
+                val message = ChatMessage(messageText, if (fromUser) USER_ID else OTHER_ID)
+                adapter.addItem(message)
+                binding.messageList.scrollToPosition(adapter.itemCount -1)
+                fromUser = !fromUser
+            }
 
-            binding.messageEdittext.setText("")
         }
     }
 
@@ -40,5 +49,6 @@ class MainActivity : AppCompatActivity() {
 
     }
 
-
 }
+
+class ChatMessage(val text: String, val senderId: Int)
