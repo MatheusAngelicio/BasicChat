@@ -28,6 +28,7 @@ class MainActivity : AppCompatActivity() {
 
             val adapter = binding.messageList.adapter
             (adapter as? MessageAdapter)?.addItem(message)
+            binding.messageList.scrollToPosition((adapter?.itemCount ?: return@setOnClickListener) -1)
 
             binding.messageEdittext.setText("")
         }

@@ -9,7 +9,7 @@ import kotlinx.android.synthetic.main.message_card.view.*
 
 class MessageAdapter : RecyclerView.Adapter<MessageViewHolder>() {
 
-    private val items: MutableList<String> = mutableListOf("Um", "Dois", "Tres")
+    private val items: MutableList<String> = mutableListOf()
 
     fun addItem(message : String){
         items.add(message)
