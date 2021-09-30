@@ -41,7 +41,6 @@ class MainActivity : AppCompatActivity() {
                 binding.messageList.scrollToPosition(adapter.itemCount - 1)
                 fromUser = !fromUser
             }
-
         }
     }
 
