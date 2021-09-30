@@ -6,6 +6,7 @@ import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.LinearLayoutManager
 import br.tecpuc.basicchat.adapter.MessageAdapter
 import br.tecpuc.basicchat.databinding.ActivityMainBinding
+import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
 
@@ -23,7 +24,12 @@ class MainActivity : AppCompatActivity() {
 
     private fun initViews() {
         binding.sendButton.setOnClickListener {
+            val message = binding.messageEdittext.text.toString()
 
+            val adapter = binding.messageList.adapter
+            (adapter as? MessageAdapter)?.addItem(message)
+
+            binding.messageEdittext.setText("")
         }
     }
 

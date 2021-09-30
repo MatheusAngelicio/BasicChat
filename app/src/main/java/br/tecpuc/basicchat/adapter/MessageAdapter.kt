@@ -9,7 +9,12 @@ import kotlinx.android.synthetic.main.message_card.view.*
 
 class MessageAdapter : RecyclerView.Adapter<MessageViewHolder>() {
 
-    val items: List<String> = listOf("Um", "Dois", "Tres")
+    private val items: MutableList<String> = mutableListOf("Um", "Dois", "Tres")
+
+    fun addItem(message : String){
+        items.add(message)
+        notifyDataSetChanged()
+    }
 
     override fun getItemCount(): Int {
         return items.size
