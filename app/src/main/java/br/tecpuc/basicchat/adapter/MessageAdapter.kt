@@ -39,10 +39,12 @@ class MessageAdapter : RecyclerView.Adapter<MessageViewHolder>() {
     override fun onBindViewHolder(holder: MessageViewHolder, position: Int) {
         val currentItem = items[position]
         holder.messageTextView.text = currentItem.text
+        holder.momentTextView.text = currentItem.moment
     }
 
 }
 
 class MessageViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-    val messageTextView = itemView.message_textview
+    val messageTextView = itemView.messageTextView
+    val momentTextView = itemView.moment_textview
 }

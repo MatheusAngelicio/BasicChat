@@ -7,6 +7,8 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import br.tecpuc.basicchat.adapter.MessageAdapter
 import br.tecpuc.basicchat.databinding.ActivityMainBinding
 import kotlinx.android.synthetic.main.activity_main.*
+import java.text.SimpleDateFormat
+import java.util.*
 
 const val USER_ID = 0
 const val OTHER_ID = 1
@@ -33,10 +35,10 @@ class MainActivity : AppCompatActivity() {
             binding.messageEdittext.setText("")
 
             val adapter = binding.messageList.adapter
-            if(adapter is MessageAdapter){
+            if (adapter is MessageAdapter) {
                 val message = ChatMessage(messageText, if (fromUser) USER_ID else OTHER_ID)
                 adapter.addItem(message)
-                binding.messageList.scrollToPosition(adapter.itemCount -1)
+                binding.messageList.scrollToPosition(adapter.itemCount - 1)
                 fromUser = !fromUser
             }
 
@@ -51,4 +53,11 @@ class MainActivity : AppCompatActivity() {
 
 }
 
-class ChatMessage(val text: String, val senderId: Int)
+class ChatMessage(
+    val text: String,
+    val senderId: Int,
+    val timestamp: Long = Date().time
+) {
+    val moment: String
+        get() = SimpleDateFormat("HH:mm").format(timestamp)
+}
