@@ -36,7 +36,7 @@
             android:id="@+id/message_list"
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_marginBottom="4dp"
+            android:background="#E5E7F1"
             app:layout_constraintBottom_toTopOf="@+id/message_edittext"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
