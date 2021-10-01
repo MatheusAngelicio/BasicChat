@@ -10,12 +10,9 @@ import kotlinx.android.synthetic.main.activity_main.*
 import java.text.SimpleDateFormat
 import java.util.*
 
-const val USER_ID = 0
-const val OTHER_ID = 1
-
 class MainActivity : AppCompatActivity() {
 
-    private var fromUser = true
+    private var viewModel = MainViewModel()
 
     private lateinit var binding: ActivityMainBinding
     private lateinit var messageAdapter: MessageAdapter
@@ -35,10 +32,8 @@ class MainActivity : AppCompatActivity() {
             val messageText = binding.messageEdittext.text.toString()
             binding.messageEdittext.setText("")
 
-            val message = ChatMessage(messageText, if (fromUser) USER_ID else OTHER_ID)
-            messageAdapter.addItem(message)
+            messageAdapter.addItem(viewModel.updateNewMessage(messageText))
             binding.messageList.scrollToPosition(messageAdapter.itemCount - 1)
-            fromUser = !fromUser
         }
     }
 
@@ -52,11 +47,3 @@ class MainActivity : AppCompatActivity() {
 
 }
 
-class ChatMessage(
-    val text: String,
-    val senderId: Int,
-    val timestamp: Long = Date().time
-) {
-    val moment: String
-        get() = SimpleDateFormat("HH:mm").format(timestamp)
-}
