@@ -18,6 +18,7 @@ class MainActivity : AppCompatActivity() {
     private var fromUser = true
 
     private lateinit var binding: ActivityMainBinding
+    private lateinit var messageAdapter: MessageAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -26,7 +27,7 @@ class MainActivity : AppCompatActivity() {
         binding.lifecycleOwner = this
 
         initViews()
-        configureRecyclerView()
+        setupRecyclerView()
     }
 
     private fun initViews() {
@@ -34,19 +35,18 @@ class MainActivity : AppCompatActivity() {
             val messageText = binding.messageEdittext.text.toString()
             binding.messageEdittext.setText("")
 
-            val adapter = binding.messageList.adapter
-            if (adapter is MessageAdapter) {
-                val message = ChatMessage(messageText, if (fromUser) USER_ID else OTHER_ID)
-                adapter.addItem(message)
-                binding.messageList.scrollToPosition(adapter.itemCount - 1)
-                fromUser = !fromUser
-            }
+            val message = ChatMessage(messageText, if (fromUser) USER_ID else OTHER_ID)
+            messageAdapter.addItem(message)
+            binding.messageList.scrollToPosition(messageAdapter.itemCount - 1)
+            fromUser = !fromUser
         }
     }
 
-    private fun configureRecyclerView() = with(binding) {
+
+    private fun setupRecyclerView() = with(binding) {
         messageList.layoutManager = LinearLayoutManager(binding.root.context)
-        messageList.adapter = MessageAdapter()
+        messageAdapter = MessageAdapter()
+        binding.messageList.adapter = messageAdapter
 
     }
 
