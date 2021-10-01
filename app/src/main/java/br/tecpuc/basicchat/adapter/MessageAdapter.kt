@@ -4,7 +4,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import br.tecpuc.basicchat.ChatMessage
+import br.tecpuc.basicchat.ChatMessageModel
 import br.tecpuc.basicchat.R
 import br.tecpuc.basicchat.USER_ID
 import kotlinx.android.synthetic.main.sent_card.view.*
@@ -14,10 +14,10 @@ const val RECEIVED_MESSAGE = 1
 
 class MessageAdapter : RecyclerView.Adapter<MessageViewHolder>() {
 
-    private val items: MutableList<ChatMessage> = mutableListOf()
+    private val items: MutableList<ChatMessageModel> = mutableListOf()
 
-    fun addItem(message: ChatMessage) {
-        items.add(message)
+    fun addItem(messageModel: ChatMessageModel) {
+        items.add(messageModel)
         notifyDataSetChanged()
     }
 

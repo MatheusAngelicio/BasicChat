@@ -11,14 +11,14 @@ class MainViewModel : ViewModel() {
 
     private var fromUser = false
 
-    fun updateNewMessage(message: String): ChatMessage {
+    fun updateNewMessage(message: String): ChatMessageModel {
         fromUser = !fromUser
-        return ChatMessage(message, if (fromUser) USER_ID else OTHER_ID)
+        return ChatMessageModel(message, if (fromUser) USER_ID else OTHER_ID)
     }
 
 }
 
-class ChatMessage(
+class ChatMessageModel(
     val text: String,
     val senderId: Int,
     val timestamp: Long = Date().time
